@@ -37,7 +37,6 @@ def login():
     sql = "select * from users where username=%s and password=%s"
     try:
         cursor.execute(sql, [(usrr), (s)])
-        db.commit()
     except:
         mb.showerror("Error","Error in SQL")
         root.destroy()

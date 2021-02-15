@@ -195,8 +195,7 @@ def clear():
 def grant():
     selection = var.get()
     if selection == 1:
-        u = usrName.get()
-        priv_com = "GRANT ALL PRIVILEGES ON books.authors  TO '%s'@'localhost'" % (u)
+        priv_com = "GRANT ALL PRIVILEGES ON lifechoicesonline.* TO username = %s @'localhost"
         cursor.execute(priv_com)
         mb.showinfo("Message", "Privileges Granted")
     elif selection >=2:
@@ -219,14 +218,6 @@ def count():
         total = ('Total number of users logged in\n', (myresult[-1][-1]))
         mb.showinfo("Attention", total)
 
-def dump():
-    username = 'lifechoices'
-    password = '@Lifechoicesonlin1234'
-    database = 'lifechoicesonline'
-
-    with open('backup.sql','w') as output:
-        c = subprocess.Popen(['mysqldump', '-u',username,'-p%s'%password,database],
-                         stdout=output, shell=True)
 
 
 lblid = Label(admin, text="ID:", fg="white", bg="black")
@@ -291,14 +282,13 @@ removebtn = Button(admin, text="Delete", width=5, bd=2, command=delete)
 clearbtn = Button(admin, text="Clear", width=5, bd=2, command=clear)
 grantbtn = Button(admin, text="Grant", width=5, bd=2, command=grant)
 countbtn = Button(admin, text="Count", width=5, bd=2, command=count)
-backup = Button(admin, text="Dump", width=22, height=5, bg="green", fg="white", command=dump)
 showbtn.place(x=300, y=100)
 addb.place(x=380, y=100)
 removebtn.place(x=460, y=100)
 clearbtn.place(x=540, y=100)
 grantbtn.place(x=620, y=100)
 countbtn.place(x=700, y=100)
-backup.place(x=10, y=400)
+
 
 
 var = IntVar()
